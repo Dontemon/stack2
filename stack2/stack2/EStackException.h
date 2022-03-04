@@ -8,12 +8,12 @@
 class EStackException
 {
 public:
-	EStackException()
+	EStackException()//конструктор поумолчанию
 	{
 		str = nullptr;
 	}
 
-	EStackException(const char* message)
+	EStackException(const char* message)//конструктор копирования строки
 	{
 		unsigned char size = strlen(message);
 		str = new char[size + 1];
@@ -23,7 +23,7 @@ public:
 		str[size] = '\0';
 	}
 
-	EStackException(const EStackException& other)
+	EStackException(const EStackException& other)//конструктор копирования
 	{
 		if (!other.str)
 			return;
@@ -35,7 +35,7 @@ public:
 		}
 	}
 
-	~EStackException()
+	~EStackException()//деструктор
 	{
 		delete[] str;
 	}
