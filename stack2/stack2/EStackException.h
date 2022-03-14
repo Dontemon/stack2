@@ -1,4 +1,4 @@
-#ifndef _EStackException_h
+п»ї#ifndef _EStackException_h
 #define _EStackException_h
 
 
@@ -8,12 +8,12 @@
 class EStackException
 {
 public:
-	EStackException()//конструктор поумолчанию
+	EStackException()//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕСѓРјРѕР»С‡Р°РЅРёСЋ
 	{
 		str = nullptr;
 	}
 
-	EStackException(const char* message)//конструктор копирования строки
+	EStackException(const char* message)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ СЃС‚СЂРѕРєРё
 	{
 		unsigned char size = strlen(message);
 		str = new char[size + 1];
@@ -23,7 +23,7 @@ public:
 		str[size] = '\0';
 	}
 
-	EStackException(const EStackException& other)//конструктор копирования
+	EStackException(const EStackException& other)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 	{
 		if (!other.str)
 			return;
@@ -35,7 +35,7 @@ public:
 		}
 	}
 
-	~EStackException()//деструктор
+	~EStackException()//РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 	{
 		delete[] str;
 	}

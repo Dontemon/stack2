@@ -8,18 +8,18 @@ template<typename T>
 class Stack
 {
 public:
-	Stack();//êîíñòðóêòîð ïî óìîë÷àíèþ
-	Stack(const Stack& other);//êîíñòðóêòîð êîïèðîâàíèÿ
-	~Stack();//äåñòðóêòîð
+	Stack();//конструктор по умолчанию
+	Stack(const Stack& other);//конструктор копирования
+	~Stack();//деструктор
 
-	T top() const;//âîçâðàùàåò çíà÷åíèå âåðõíåãî ýëåìåíòà
-	bool empty() const;//ïðîâåðêà íà ïóñòîòó
-	unsigned size() const;//âîçâðàùàåò êîëëè÷åñòâî ýëåìåíòîâ â ñòýêå
+	T top() const;//возвращает значение верхнего элемента
+	bool empty() const;//проверка на пустоту
+	unsigned size() const;//возвращает колличество элементов в стэке
 
-	void push(T value);//äîáàâëåíèå ýëåìåíòà â ñòýê
-	void pop();//óäàëåíèå ýëåìåíòà èç ñòýêà
+	void push(T value);//добавление элемента в стэк
+	void pop();//удаление элемента из стэка
 
-	Stack& operator = (const Stack& other);//îïåðàòîð ïðèñâàåíèÿ
+	Stack& operator = (const Stack& other);//оператор присваения
 
 private:
 	List<T>* list;
@@ -29,7 +29,7 @@ private:
 template<typename T>
 Stack<T>::Stack()
 {
-	list = new List<T>;//ñîçäàåì ñïèñîê äëÿ ôîðìèðîâàíèÿ ñòýêà
+	list = new List<T>;//создаем список для формирования стэка
 
 }
 
@@ -37,7 +37,7 @@ Stack<T>::Stack()
 template<typename T>
 Stack<T>::Stack(const Stack& other)
 {
-	list = new List<T>(*other.list);//÷åðåç êîíñòðóêòîð êîïèðîâàíèÿ ñïèñêà, êîïèðóåì ñòýê
+	list = new List<T>(*other.list);//через конструктор копирования списка, копируем стэк
 
 }
 
@@ -45,54 +45,54 @@ Stack<T>::Stack(const Stack& other)
 template<typename T>
 Stack<T>::~Stack()
 {
-	delete list;//óäàëÿåì ñïèñîê
+	delete list;//удаляем список
 }
 
 
 template<typename T>
 T Stack<T>::top() const
 {
-	if (list->empty())//åñëè ñòýê ïóñòîé, òî âûêèäûâàåì èñêëþ÷åíèå
+	if (list->empty())//если стэк пустой, то выкидываем исключение
 		throw EStackEmpty();
 
-	return list->back();//âûâîäèì õâîñò ñïèñêà(õâîñò ñïèñêà ýòî âåðõíèé ýëåìåíò ñòýêà)
+	return list->back();//выводим хвост списка(хвост списка это верхний элемент стэка)
 }
 
 template<typename T>
 bool Stack<T>::empty() const
 {
-	return list->empty();//ïðîâåðÿåì ïóñòîé ëè ñïèñîê
+	return list->empty();//проверяем пустой ли список
 }
 
 template<typename T>
 unsigned Stack<T>::size() const
 {
-	return list->size();//âîçâðàùàåò êîëè÷åñòâî ýëåìåíòîâ â ñïèñêå(ñòýêå)
+	return list->size();//возвращает количество элементов в списке(стэке)
 }
 
 template<typename T>
 void Stack<T>::push(T value)
 {
-	list->push_back(value);//âñòàâëÿåì ýëåìåíò â õâîñò ñïèñêà(èëè ïðîñòî äîáàâëÿåì ýëåìåíò â ñòýê)
+	list->push_back(value);//вставляем элемент в хвост списка(или просто добавляем элемент в стэк)
 }
 
 template<typename T>
 void Stack<T>::pop()
 {
-	if (list->empty())//åñëè ñòýê ïóñòîé, òî âîçâðàùàåì èñêëþ÷åíèå
+	if (list->empty())//если стэк пустой, то возвращаем исключение
 		throw EStackEmpty();
 
-	list->pop_back();//óäàëÿåì âåðõíèé ýëåìåíò ñòýêà
+	list->pop_back();//удаляем верхний элемент стэка
 }
 
 template<typename T>
 Stack<T>& Stack<T>::operator = (const Stack& other)
 {
-	if (this == &other)//åñëè ñòýêè ñîâïàäàþò, òî âîçâðàùàåì íàø ñòýê
+	if (this == &other)//если стэки совпадают, то возвращаем наш стэк
 		return *this;
 
-	delete list;//óäàëÿåì íàø ñòýê
-	list = new List<T>(*other.list);//÷åðåç êîíñòðóêòîð êîïèðîâàíèÿ ñïèñêà, êîïèðóåì ñòýê
+	delete list;//удаляем наш стэк
+	list = new List<T>(*other.list);//через конструктор копирования списка, копируем стэк
 
 	return *this;
 }

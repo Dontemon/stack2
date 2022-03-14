@@ -1,4 +1,4 @@
-#ifndef _EStackEmpty_h
+п»ї#ifndef _EStackEmpty_h
 #define _EStackEmpty_h
 
 
@@ -9,17 +9,17 @@ class EStackEmpty : public EStackException
 {
 public:
 
-	EStackEmpty() : EStackException("Error: Stack is Empty\n")//конструктор поумолчанию
+	EStackEmpty() : EStackException("Error: Stack is Empty\n")//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕСѓРјРѕР»С‡Р°РЅРёСЋ
 	{
 
 	}
 
-	EStackEmpty(const EStackEmpty& other) : EStackException(other)//конструктор копирования
+	EStackEmpty(const EStackEmpty& other) : EStackException(other)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 	{
 
 	}
 
-	const char* what()const//метод, который возвращает сообщение об ошибке
+	const char* what()const//РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
 	{
 		return str;
 	}

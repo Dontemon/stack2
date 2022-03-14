@@ -6,23 +6,23 @@ template<typename T>
 class List
 {
 public:
-	List() = default;//êîíñòðóêòîð ïî óìîë÷àíèþ
-	List(const List& other);//êîíñòðóêòîð êîïèðîâàíèÿ
-	~List();//äåñòðóêòîð
+	List() = default;//конструктор по умолчанию
+	List(const List& other);//конструктор копирования
+	~List();//деструктор
 
 	T front() const;//
 	T back() const;//
 
-	bool empty() const;//ïðîâåðêà íà ïóñòîòó ñïèñêà
-	unsigned size() const;//âûäà¸ò êîëëè÷åñòâî ýëåìåíòîâ ñïèñêà
-	void clear();//÷èñòèò âåñü ñïèñîê
+	bool empty() const;//проверка на пустоту списка
+	unsigned size() const;//выдаёт колличество элементов списка
+	void clear();//чистит весь список
 
-	void push_front(const T& value);//âñòàâêà â ãîëîâó
-	void pop_front();//óäàëåíèå èç ãîëîâû
-	void push_back(const T& value);//âñòàâêà â õâîñò
-	void pop_back();//óäàëåíèå èç õâîñòà
+	void push_front(const T& value);//вставка в голову
+	void pop_front();//удаление из головы
+	void push_back(const T& value);//вставка в хвост
+	void pop_back();//удаление из хвоста
 
-	List& operator = (const List& other);//îïåðàòîð ïðèñâàåâàíèÿ
+	List& operator = (const List& other);//оператор присваевания
 
 private:
 	struct Node
@@ -33,10 +33,10 @@ private:
 
 		Node(const T& data)
 		{
-			this->data = data;//êîíñòðóêòîð
+			this->data = data;//конструктор
 		}
 
-		Node(const Node& other)//êîíñòðóêòîð ïî óìîë÷àíèþ
+		Node(const Node& other)//конструктор по умолчанию
 		{
 			data = other.data;
 		}
@@ -50,14 +50,14 @@ private:
 template<typename T>
 List<T>::List(const List& other)
 {
-	if (!other.head)//ïðîâåðÿåì ñóùåñòâóåò ëè other
+	if (!other.head)//проверяем существует ли other
 		return;
 
-	head = new Node(*other.head);//ïåðåâûäåëÿåì ïàìÿòü ïîä ãîëîâó
+	head = new Node(*other.head);//перевыделяем память под голову
 	tail = head;
-	Node* head_ptr = head;//ñîçäàåì êàçàòåëü íà ãîëîâó
+	Node* head_ptr = head;//создаем казатель на голову
 	for (Node* tmp = other.head->next; tmp != nullptr; tmp = tmp->next, head_ptr = head_ptr->next) {
-		head_ptr->next = new Node(*tmp); //âûäåëÿåì ïàìÿòü
+		head_ptr->next = new Node(*tmp); //выделяем память
 		tail = head_ptr->next;
 		tail->prev = head_ptr;
 	}
@@ -73,19 +73,19 @@ List<T>::~List()
 template<typename T>
 T List<T>::front() const
 {
-	return head->data;//âîçâðàùàåì çíà÷åíèå èç ãîëîâû
+	return head->data;//возвращаем значение из головы
 }
 
 template<typename T>
 T List<T>::back() const
 {
-	return tail->data;//âîçâðàùàåì çíà÷åíèå èç õâîñòà
+	return tail->data;//возвращаем значение из хвоста
 }
 
 template<typename T>
 bool List<T>::empty() const
 {
-	return head == nullptr;//åñëè ãîëîâû íåò, òî è ñïèñêà íåò
+	return head == nullptr;//если головы нет, то и списка нет
 }
 
 template<typename T>
@@ -102,8 +102,8 @@ template<typename T>
 void List<T>::clear()
 {
 	for (Node* tmp = head; head != nullptr; tmp = head) {
-		head = head->next;//ìåíÿåì ãîëîâó
-		delete tmp;//óäàëÿåì "ñòàðóþ" ãîëîâó
+		head = head->next;//меняем голову
+		delete tmp;//удаляем "старую" голову
 	}
 	tail = nullptr;
 }
@@ -111,12 +111,12 @@ void List<T>::clear()
 template<typename T>
 void List<T>::push_back(const T& value)
 {
-	if (head != nullptr) {//åñëè ãîëîâà åñòü
-		tail->next = new Node(value);//âûäåëÿåì ïàìÿòü ïîä óçåë
-		tail->next->prev = tail;//çàìåíÿåì ñòàðûé õâîñò íà íîâûé
-		tail = tail->next;//ïåðåîïðåäåëÿì õâîñò, òàê êàê äîáàâèëñÿ íîâûé ýëåìåíò	
+	if (head != nullptr) {//если голова есть
+		tail->next = new Node(value);//выделяем память под узел
+		tail->next->prev = tail;//заменяем старый хвост на новый
+		tail = tail->next;//переопределям хвост, так как добавился новый элемент	
 	}
-	else {//åñëè ãîëîâû íåò, òî ãîëîâà è õâîñò ñîâïàäàþò
+	else {//если головы нет, то голова и хвост совпадают
 		tail = new Node(value);
 		head = tail;
 	}
@@ -125,16 +125,16 @@ void List<T>::push_back(const T& value)
 template<typename T>
 void List<T>::pop_back()
 {
-	if (empty())//åñëè ñïèñîê ïóñòîé, òî íè÷åãî íå âîçâðàùàåì
+	if (empty())//если список пустой, то ничего не возвращаем
 		return;
 
-	if (head == tail) {//åñëè â ñïèñêå îäèí ýëåìåíò
-		delete tail;//óäàëÿåì õâîñò
+	if (head == tail) {//если в списке один элемент
+		delete tail;//удаляем хвост
 		head = tail = nullptr;
 	}
 	else {
-		tail = tail->prev;//ïåðåïðèñâàåâàåì õâîñò
-		delete tail->next;//óäàëÿåì õâîñò
+		tail = tail->prev;//переприсваеваем хвост
+		delete tail->next;//удаляем хвост
 		tail->next = nullptr;
 	}
 }
@@ -143,12 +143,12 @@ template<typename T>
 void List<T>::push_front(const T& value)
 {
 	if (head != nullptr) {
-		head->prev = new Node(value);//âûäåëÿåì ïàìÿòü è ñîçäàåì íîâûé óçåë ïåðåä ãîëîâîé
-		head->prev->next = head;//ýòîò óçåë îáúÿâëÿåì ãîëîâîé
+		head->prev = new Node(value);//выделяем память и создаем новый узел перед головой
+		head->prev->next = head;//этот узел объявляем головой
 		head = head->prev;
 	}
 	else {
-		head = new Node(value);//åñëè ãîëîâû íå ñóùåñòâóåò, ïðîñòî ñîçäàåì å¸
+		head = new Node(value);//если головы не существует, просто создаем её
 		tail = head;
 	}
 }
@@ -156,16 +156,16 @@ void List<T>::push_front(const T& value)
 template<typename T>
 void List<T>::pop_front()
 {
-	if (empty())//åñëè ñïèñîê ïóñòîé, íè÷åãî íå äåëàåì
+	if (empty())//если список пустой, ничего не делаем
 		return;
 
-	if (head == tail) {//åñëè ãîëîâà è õâîñò ýòî îäèí è òîò æå óçåë, òî ïðîñòî óäàëÿåì ãîëîâó
+	if (head == tail) {//если голова и хвост это один и тот же узел, то просто удаляем голову
 		delete head;
 		head = tail = nullptr;
 	}
 	else {
-		head = head->next;//ïåðåîïðåäåëÿåì ãîëîâó
-		delete head->prev;//óäàëÿåì "ñòàðóþ" ãîëîâó
+		head = head->next;//переопределяем голову
+		delete head->prev;//удаляем "старую" голову
 		head->prev = nullptr;
 	}
 }
@@ -174,17 +174,17 @@ void List<T>::pop_front()
 template<typename T>
 List<T>& List<T>::operator = (const List& other)
 {
-	if (this == &other)//åñëè ñïèñêè ðàâíû, òî âîçâðàùàåì íàø ñïèñîê
+	if (this == &other)//если списки равны, то возвращаем наш список
 		return *this;
 
-	clear();//åñëè íå ðàâíû, òî ñíà÷àëà ÷èñòèì íàø ñïèñîê
+	clear();//если не равны, то сначала чистим наш список
 
-	head = new Node(*other.head);//ñîçäàåì ãîëîâó
-	tail = head;//îáúÿâëÿåì õâîñò
-	Node* head_ptr = head;//ñîçäàåì óêàçàòåëü íà ãîëîâó
+	head = new Node(*other.head);//создаем голову
+	tail = head;//объявляем хвост
+	Node* head_ptr = head;//создаем указатель на голову
 	for (Node* tmp = other.head->next; tmp != nullptr; tmp = tmp->next, head_ptr = head_ptr->next) {
-		head_ptr->next = new Node(*tmp);//âûäåëÿåì ïàìÿòü ïîä íîâûé ýëåìåíò
-		tail = head_ptr->next;//çàïîëíÿåì íàø ñïèñîê, ýëåìåíòàìè ñïèñêà other
+		head_ptr->next = new Node(*tmp);//выделяем память под новый элемент
+		tail = head_ptr->next;//заполняем наш список, элементами списка other
 		tail->prev = head_ptr;
 	}
 
