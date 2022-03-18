@@ -139,12 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EStackEmpty.h" />
     <ClInclude Include="EStackException.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="PersonKeeper.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
