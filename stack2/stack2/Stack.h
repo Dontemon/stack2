@@ -21,6 +21,8 @@ public:
 
 	Stack& operator = (const Stack& other);//оператор присваения
 
+	const T& operator[] (unsigned index) const;// перегрузка скобок нужна чтобы ходить по элементам 
+
 private:
 	List<T>* list;
 };
@@ -97,4 +99,16 @@ Stack<T>& Stack<T>::operator = (const Stack& other)
 	return *this;
 }
 
+template<typename T>
+const T& Stack<T>::operator[] (unsigned index) const
+{
+	try 
+	{
+		return (*list)[index];
+	}
+	catch (const char* error)
+	{
+		throw " index > stack size";
+	}
+}
 #endif

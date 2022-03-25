@@ -1,0 +1,15 @@
+﻿  Source.cpp
+C:\Users\Слава\source\repos\stack2\stack2\stack2\EStackException.h(18,1): warning C4267: инициализация: преобразование из "size_t" в "unsigned char"; возможна потеря данных
+C:\Users\Слава\source\repos\stack2\stack2\stack2\Stack.h(109,21): warning C4101: error: неиспользованная локальная переменная
+C:\Users\Слава\source\repos\stack2\stack2\stack2\Stack.h(104): message : во время компиляции функции-члена класс шаблон "const T &Stack<T>::operator [](unsigned int) const"
+          with
+          [
+              T=Person
+          ]
+C:\Users\Слава\source\repos\stack2\stack2\stack2\PersonKeeper.h(45): message : выполняется компиляция ссылки на экземпляр шаблон функции "const T &Stack<T>::operator [](unsigned int) const"
+          with
+          [
+              T=Person
+          ]
+C:\Users\Слава\source\repos\stack2\stack2\stack2\PersonKeeper.h(29): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "Stack<Person>"
+  stack2.vcxproj -> C:\Users\Слава\source\repos\stack2\stack2\Debug\stack2.exe

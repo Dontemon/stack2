@@ -24,6 +24,8 @@ public:
 
 	List& operator = (const List& other);//оператор присваевания
 
+	const T& operator[] (unsigned index) const;
+
 private:
 	struct Node
 	{
@@ -189,5 +191,18 @@ List<T>& List<T>::operator = (const List& other)
 	}
 
 	return *this;
+}
+
+template<typename T>
+const T& List<T>::operator[] (unsigned index) const 
+{
+	Node* tmp = head;
+	unsigned i = 0;
+	for (; tmp != nullptr && i < index; tmp = tmp->next, ++i);
+
+	if (tmp == nullptr)
+		throw "Index > list size";
+	else
+		return tmp->data;
 }
 #endif
