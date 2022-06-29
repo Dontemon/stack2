@@ -26,6 +26,7 @@ public:
 
 	const T& operator[] (unsigned index) const;
 
+
 private:
 	struct Node
 	{
@@ -201,7 +202,10 @@ const T& List<T>::operator[] (unsigned index) const
 	for (; tmp != nullptr && i < index; tmp = tmp->next, ++i);
 
 	if (tmp == nullptr)
-		throw "Index > list size";
+	{
+		const char* badIndexError = "Index > list size";
+		throw badIndexError;
+	}
 	else
 		return tmp->data;
 }

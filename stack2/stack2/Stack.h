@@ -106,7 +106,7 @@ const T& Stack<T>::operator[] (unsigned index) const
 	{
 		return (*list)[index];
 	}
-	catch (const char* error)
+	catch (const char* badIndexError)
 	{
 		throw " index > stack size";
 	}

@@ -1,6 +1,6 @@
 ﻿  Source.cpp
 C:\Users\Слава\source\repos\stack2\stack2\stack2\EStackException.h(18,1): warning C4267: инициализация: преобразование из "size_t" в "unsigned char"; возможна потеря данных
-C:\Users\Слава\source\repos\stack2\stack2\stack2\Stack.h(109,21): warning C4101: error: неиспользованная локальная переменная
+C:\Users\Слава\source\repos\stack2\stack2\stack2\Stack.h(109,21): warning C4101: badIndexError: неиспользованная локальная переменная
 C:\Users\Слава\source\repos\stack2\stack2\stack2\Stack.h(104): message : во время компиляции функции-члена класс шаблон "const T &Stack<T>::operator [](unsigned int) const"
           with
           [
